@@ -6,15 +6,20 @@ url='http://www.dilbert.com'
 
 print_help()
 {
-	echo "Usage: $0 [from|today] [to]" >&2
+	echo "Usage: $0 [from] [to]" >&2
+}
+
+print_error()
+{
+	echo "ERROR: $1" >&2
 }
 
 load_date()
 {
 	date=$(date -d "$1" +'%F' 2> /dev/null)
 	if [ "$?" -ne 0 ]; then
-		echo 'ERROR: Bad date format.' >&2
-		exit 1
+		print_error 'Bad date format.'
+		exit 2
 	fi
 }
 
@@ -26,6 +31,14 @@ if [ "$#" -eq 2 ]; then
 elif [ "$#" -eq 1 ]; then
 	load_date "$1"
 	date_start="$date"
+elif [ "$#" -gt 2 ]; then
+	print_help
+	exit 1
+fi
+
+if [ "$date_start" \> "$date_end" ]; then
+	print_error 'Start date is greater then end date.'
+	exit 3
 fi
 
 i=0

@@ -1,11 +1,31 @@
 #!/bin/sh
 
-date_start='1989-04-16'
+date_start='1989-04-16' # first strip
 date_end=$(date +"%F")  # today
 url='http://www.dilbert.com'
 
-if [ "$1" = 'today' ]; then
-	date_start=$(date +"%F")  # today
+print_help()
+{
+	echo "Usage: $0 [from|today] [to]" >&2
+}
+
+load_date()
+{
+	date=$(date -d "$1" +'%F' 2> /dev/null)
+	if [ "$?" -ne 0 ]; then
+		echo 'ERROR: Bad date format.' >&2
+		exit 1
+	fi
+}
+
+if [ "$#" -eq 2 ]; then
+	load_date "$1"
+	date_start="$date"
+	load_date "$2"
+	date_end="$date"
+elif [ "$#" -eq 1 ]; then
+	load_date "$1"
+	date_start="$date"
 fi
 
 i=0

@@ -47,7 +47,7 @@ while [ "$date_current" != "$date_end" ]; do
 	if [ ! -f "${date_current}.gif" ]; then
 		link=$(wget -q -O - ${url}/${date_current}/ | grep '.strip.zoom.gif' | sed 's/^\(.*\) src="//;s/" title=\(.*\)$//;')
 		link="${url}${link}"
-		wget -nv -O "${date_current}.gif" "$link"
+		wget -nv -O "${date_current}.gif" "$link" 2>&1
 	fi
 	i=$(expr $i + 1)
 done

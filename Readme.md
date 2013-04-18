@@ -19,5 +19,5 @@ Examples
 
 `$ dilbert.sh today` - download today strip
 
-`$ dilbert.sh 2012-10-10 yesterday` - download strips from 10. 10. 2012 to yesterday
+`$ dilbert.sh 2012-10-07 yesterday` - download strips from 7. 10. 2012 to yesterday
 

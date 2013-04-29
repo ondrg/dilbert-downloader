@@ -49,7 +49,7 @@ while [ "$date_current" != "$date_end" ]; do
 		link="${url}${link}"
 		wget -nv -O "${date_current}.gif" "$link" 2>&1
 	fi
-	i=$(expr $i + 1)
+	i=$(($i + 1))
 done
 
 exit 0

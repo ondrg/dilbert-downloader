@@ -1,7 +1,8 @@
 #!/bin/sh
 
+today=$(date +"%F")  # today
 date_start='1989-04-16' # first strip
-date_end=$(date +"%F")  # today
+date_end="$today"
 url='http://www.dilbert.com'
 
 print_help()
@@ -39,6 +40,12 @@ fi
 if [ "$date_start" \> "$date_end" ]; then
 	print_error 'Start date is greater then end date.'
 	exit 3
+elif [ "$date_start" \> "$today" ]; then
+	print_error 'Start date is greater then today.'
+	exit 4
+elif [ "$date_end" \> "$today" ]; then
+	print_error 'End date is greater then today.'
+	exit 5
 fi
 
 i=0

@@ -3,7 +3,7 @@
 today=$(date +"%F")  # today
 date_start='1989-04-16' # first strip
 date_end="$today"
-url='http://www.dilbert.com'
+url='http://dilbert.com'
 
 print_help()
 {
@@ -52,8 +52,7 @@ i=0
 while [ "$date_current" != "$date_end" ]; do
 	date_current=$(date --date="$(date --date=${date_start} +%F) + $i day" +"%F")
 	if [ ! -f "${date_current}.gif" ]; then
-		link=$(wget -q -O - ${url}/${date_current}/ | grep '.strip.zoom.gif' | sed 's/^\(.*\) src="//;s/" title=\(.*\)$//;')
-		link="${url}${link}"
+		link=$(wget -q -O - ${url}/strip/${date_current}/ | grep 'img-responsive img-comic' | sed 's/^\(.*\) src="//;s/" width=\(.*\)$//;')
 		wget -nv -O "${date_current}.gif" "$link" 2>&1
 	fi
 	i=$(($i + 1))

@@ -52,7 +52,7 @@ i=0
 while [ "$date_current" != "$date_end" ]; do
 	date_current=$(date --date="$(date --date=${date_start} +%F) + $i day" +"%F")
 	if [ ! -f "${date_current}.gif" ]; then
-		link=$(wget -q -O - ${url}/strip/${date_current}/ | grep 'img-responsive img-comic' | sed 's/^\(.*\) src="//;s/" width=\(.*\)$//;')
+		link=$(wget -q -O - ${url}/strip/${date_current} | grep 'comic-item-container' | sed 's/^\(.*\) data-image="//;s/" data-date=\(.*\)$//;')
 		wget -nv -O "${date_current}.gif" "$link" 2>&1
 	fi
 	i=$(($i + 1))

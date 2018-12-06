@@ -1,4 +1,4 @@
-language: bash
+language: sh
 
 script:
-    - bash test_dilbert.sh
+  - ./test_dilbert.sh

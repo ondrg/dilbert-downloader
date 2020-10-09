@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+set -euo pipefail
 
 SCRIPT_FILE='dilbert.sh'
 WANTED_DATE='2018-12-01'
@@ -16,7 +18,7 @@ if [ ! -f "$SCRIPT_FILE" ]; then
 	print_error "Script '$SCRIPT_FILE' does not exists!"
 fi
 
-sh "$SCRIPT_FILE" "$WANTED_DATE" "$WANTED_DATE"
+bash "$SCRIPT_FILE" "$WANTED_DATE" "$WANTED_DATE"
 
 if [ ! -f "$OUTPUT_FILE" ]; then
 	print_error "Output file '$OUTPUT_FILE' does not exits!"

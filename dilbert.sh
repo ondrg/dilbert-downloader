@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+set -euo pipefail
 
 today=$(date +"%F")  # today
 date_start='1989-04-16' # first strip
@@ -49,6 +51,7 @@ elif [ "$date_end" \> "$today" ]; then
 fi
 
 i=0
+date_current=''
 while [ "$date_current" != "$date_end" ]; do
 	date_current=$(date --date="$(date --date=${date_start} +%F) + $i day" +"%F")
 	if [ ! -f "${date_current}.gif" ]; then
